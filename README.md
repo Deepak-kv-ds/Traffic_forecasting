@@ -75,4 +75,83 @@ More traffic → increased demand → surge pricing
 Understanding this relationship helps explain why Uber fares fluctuate and 
 why they rise sharply during traffic-heavy conditions. 
  
-                
+
+## Report on Model Evaluation & Refinement
+## 1. Evaluation Metrics Selection
+To assess the predictive performance of traffic forecasting models, multiple
+evaluation metrics were selected to capture different aspects of model accuracy and
+reliability.
+Mean Absolute Error (MAE): Measures the average absolute difference between
+predicted and actual vehicle counts, providing an intuitive interpretation of prediction
+accuracy.
+Root Mean Square Error (RMSE): Penalizes larger errors more heavily, making it
+particularly suitable for evaluating peak-hour prediction performance.
+R-squared (R²): Indicates the proportion of variance in traffic volume explained by the
+model and provides an overall measure of goodness-of-fit.
+These metrics were chosen to align with the primary objective of minimizing traffic
+volume prediction errors, especially during high-congestion periods.
+## 2. Model Performance Evaluation
+Model evaluation was conducted using a time-based validation strategy to ensure
+that the models were tested on future data not observed during training. This
+approach reflects real-world traffic forecasting scenarios and prevents data leakage.
+Each predictive model was evaluated using MAE, RMSE, and R² on the validation
+dataset. Numerical evaluation was complemented with graphical diagnostics,
+including predicted-versus-actual plots and residual analysis, to gain deeper insight
+into model behavior.
+## 3. Visual Diagnostic Analysis
+Visual inspection played a critical role in interpreting model performance:
+Predicted vs Actual Plots demonstrated strong alignment during off-peak hours and
+moderate deviations during peak congestion periods.
+Residual Plots revealed that errors were generally centered around zero, indicating
+minimal systematic bias.
+Error Distribution Charts showed slightly wider error distributions during peak hours,
+reflecting the inherent variability of traffic congestion.
+These diagnostics confirmed that most prediction errors were random rather than
+systematic.
+## 4. Cross-Validation Strategy
+Standard random cross-validation was avoided due to the temporal nature of traffic
+data. Instead, time-based cross-validation was employed using an expanding window
+approach, where the training dataset grows chronologically and the validation
+dataset always represents future observations.
+This method ensures that temporal dependencies are preserved and that the
+validation process closely simulates real-world deployment conditions.
+## 5. Cross-Validation Results Analysis
+Cross-validation results showed consistent performance across multiple folds, with
+no significant fluctuations in MAE or RMSE. This stability indicates strong model
+generalization and suggests that the models are not overly sensitive to specific
+training periods.
+No evidence of severe overfitting or underfitting was observed. Minor increases in
+error during peak hours were expected due to higher traffic volatility and did not
+indicate structural weaknesses in the models.
+## 6. Model Diagnostics and Error Analysis
+Model diagnostics revealed:
+Low bias: The models effectively captured overall traffic trends and peak-hour
+behavior.
+Controlled variance: Performance remained stable across different time segments.
+Peak-hour sensitivity: Slightly higher errors during peak congestion periods due to
+unpredictable traffic surges.
+These findings suggest that the models perform reliably under normal conditions and
+handle peak-hour congestion with acceptable accuracy.
+## 7. Model Refinement and Improvement
+Model refinement was achieved through several iterative steps:
+Feature engineering enhancements, including temporal lag features (t−1 and t−24),
+time-based variables, and contextual indicators such as weather and events.
+Algorithm exploration, comparing baseline time-series models (ARIMA), ensemble
+learning methods (Gradient Boosting), and deep learning approaches (LSTM).
+Hyperparameter tuning using randomized search to optimize performance while
+managing computational complexity.
+Among the evaluated models, Gradient Boosting Trees provided the best balance
+between accuracy, robustness, and interpretability.
+## 8. Final Evaluation Summary
+The evaluation and refinement process demonstrated that traffic congestion patterns
+are primarily driven by temporal factors rather than external conditions. Time-aware
+validation and cross-validation confirmed model robustness, while diagnostic
+analyses showed minimal bias and controlled variance. The refined models are well
+suited for predicting traffic volume and identifying peak congestion periods, providing
+a strong foundation for data-driven traffic management strategies.
+## 9. Conclusion
+This evaluation and refinement framework ensures that predictive models are not only
+accurate but also reliable and generalizable. By combining statistical metrics, visual
+diagnostics, and time-based validation, the study delivers a comprehensive
+assessment of model performance and readiness for real-world application.
+
